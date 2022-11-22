@@ -1,0 +1,54 @@
+org: jakec
+app: sydtransit
+
+service: sydtransitservice
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 3008
+  stage: dev
+  region: ap-southeast-2
+  iamRoleStatements:
+    -  Effect: "Allow"
+       Action:
+         - "s3:GetObject"
+       Resource:
+        - "arn:aws:s3:::sydney-bus-visualisation/*"
+functions:
+  backend:
+    handler: dist/lambda.handler
+    events:
+      - http:
+          path: / # this matches the base path
+          method: ANY
+          cors: true # <-- CORS!
+      - http:
+          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: ANY
+          cors: true
+
+package: # Optional deployment packaging configuration
+  include: # Specify the directories and files which should be included in the deployment package
+    - dist/**
+  exclude:
+    - cache/**
+    - database/**
+    - data/**
+    - rust/**
+    - downloads/**
+    - src/**
+    - scripts/**
+    - temp/**
+    - server/**
+
+plugins:
+    - serverless-plugin-include-dependencies
+    - serverless-api-gateway-throttling
+
+custom:
+  # Configures throttling settings for all http endpoints
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 100
+    maxConcurrentRequests: 100
+

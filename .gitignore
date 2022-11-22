@@ -1,0 +1,41 @@
+# Global gitignore
+.DS_Store
+yarn-error.log
+*.swp
+tsconfig.tsbuildinfo
+.DS_Store
+npm-debug.log
+.serverless/
+yarn-error.log
+serverless_sdk/
+s_departures.js
+downloads
+
+
+# Compiled JS
+dist/
+node_modules/
+src/marey-db-connector.ts
+src/interfaces.ts
+cache/
+
+# Frontend
+# Compiled JS
+frontend/dist/
+
+# COMMON FILES
+frontend/src/interfaces.ts
+frontend/src/utils/config.ts
+aws-uploader/src/config.ts
+database/src/config.ts
+
+frontend/cache/
+
+# Long term storage
+data/
+
+# Database things
+database/gtfs-db/gtfs-files/
+database/gtfs-db/gtfs-files-backup/
+*.db-journal
+*.db

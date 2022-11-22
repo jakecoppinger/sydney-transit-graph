@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>About | Sydney Transit Graph</title>
+    <meta name="description" content="More information about how to use Sydney Transit Graph and how it was built.">
+    <meta name="keywords" content="sydney,transit,graph,congestion,urbanism,design,tfnsw,marey,diagram">
+    <meta name="author" content="Jake Coppinger">
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link href="/css/styles.css" rel="stylesheet" />
+
+    <script type="text/javascript">   
+      window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-"+e+".js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};   
+      heap.load("994576161"); 
+      </script>
+    <!-- <script src='libs/p5.min.js'></script> -->
+  </head>
+  <body>
+    <div id="textcontainer">
+    <h1><a class="nolink" href="/">Sydney <br />Transit <br />Graph</a></h1>
+    <h2>A side-project by <a href="https://jakecoppinger.com">Jake Coppinger</a>.</h2>
+
+    <p>
+      A visualisation of realtime Sydney bus congestion. 
+
+      Each line on the graph (a <a href="https://www.researchgate.net/figure/Mareys-graphical-train-schedule-Used-from-Tufte-2001-Original-source-E-J_fig3_340933385">
+      Marey chart</a>) represents a bus completing its route (percentage) over time. Click on
+      a line to highlight the position of that particular bus on the map.
+    
+      When the angle of the line is shallow, there is bus congestion. When the lines are bunched together,
+      there is <a href="https://en.wikipedia.org/wiki/Bus_bunching">bus bunching</a>.
+    </p>
+
+    <p>
+      Less bus congestion results in faster trip times, which in turn reduces labour costs,
+      decreases bus headways (or reduces need for new buses) and improves passenger throughput.
+    </p>
+
+    <p>
+      If I have time I'm interested in:
+      <ul>
+        <li>Correlating congestion hotspots with OpenStreetMap lane data to better inform bus lane
+          implementation policy</li>
+        <li>Writing up analysis of pre/post COVID-19 transit patterns</li>
+        <li>Including train data in the pipeline (it's the same API)</li>
+        <li>Improve interpolation of routes on the frontend so it's not just a straight line average
+           between dots (interpolating along the route instead)</li>
+      </ul>
+    </p>
+
+    <h3>Author</h3>
+    <img src="/img/headshot.jpeg" alt="Headshot of Jake Coppinger">
+    <p>I'm currently working as a software engineer at Atlassian. I built
+      this in my spare time as a side project.</p>
+
+    <p>Have any questions? Interested in solving problems with this data?
+      Got an interesting transit design or urban planning related role?
+      Reach out to me at <a href="mailto:jake@jakecoppinger.com">jake@jakecoppinger.com</a></p>
+      <p>See more of my side projects & hobbies at <a href="https://jakecoppinger.com/">jakecoppinger.com</a></p>
+
+    <h3>Behind the scenes</h3>
+    <p>The web app is built with vanilla JS (TypeScript), <a href="https://p5js.org">p5.js</a> for the
+      graph, and <a href="https://www.mapbox.com">Mapbox GL JS</a> for the map (which uses
+      OpenStreetMap data).</p>
+      <p>
+      Data is sourced from Transport for NSW via 
+      <a href="https://opendata.transport.nsw.gov.au/dataset/public-transport-realtime-vehicle-positions">OpenData</a>.
+    Realtime data is ingested every few seconds via an service running on AWS EC2 to store
+    Protocol Buffer files on AWS S3.
+    </p>
+
+    <p>
+      When requested via an API, a service on AWS Lambda retrives these Protocol Buffer files and
+      computes the trip progress and occupancy of every bus in a specified time window.
+      </p>
+
+      <p>
+      I adjustably quantise the number of Protocol Buffers requested
+      (and thus the number of results) via looking up available timestamps.
+      </p>
+      <p>
+      Trip progress is calculated by comparing positions against bus route shapes. These route shapes
+      have been precomputed from GTFS database dumps (via Sqlite) and stored on AWS S3 as JSON.
+    </p>
+        <br>
+    </div>
+  </body>
+</html>

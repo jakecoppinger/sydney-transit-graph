@@ -1,0 +1,14 @@
+
+.DS_Store
+npm-debug.log
+
+*.db
+# GTFS impor data
+gtfs-files
+
+# Output JSON files
+dist/
+
+# Temp files
+temp-route-ids.txt
+

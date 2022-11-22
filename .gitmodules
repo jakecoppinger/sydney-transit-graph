@@ -1,0 +1,3 @@
+[submodule "database/gtfs-db/gtfs_SQL_importer"]
+	path = database/gtfs-db/gtfs_SQL_importer
+	url = git@github.com:cbick/gtfs_SQL_importer.git

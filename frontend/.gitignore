@@ -1,0 +1,7 @@
+node_modules
+*.swp
+dist/
+.DS_Store
+
+src/interfaces.ts
+npm-debug.log

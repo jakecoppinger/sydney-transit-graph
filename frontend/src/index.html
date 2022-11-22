@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sydney Transit Graph</title>
+    <meta name="description" content="A visualisation of realtime Sydney bus congestion using Marey diagrams. A side project by Jake Coppinger.">
+    <meta name="keywords" content="sydney,transit,graph,congestion,urbanism,design,tfnsw,marey,diagram">
+    <meta name="author" content="Jake Coppinger">
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+
+
+    <script type="text/javascript">   
+      window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-"+e+".js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};   
+      heap.load("994576161"); 
+      </script>
+    <!-- <script src='libs/p5.min.js'></script> -->
+  </head>
+  <body class="landing">
+    <h1 class="landing">Sydney<br />Transit<br />Graph<span id="route_id_title"></span></h1>
+    <h2 class="landing"><a href="/about">More info...</a></h2>
+    <div id="map"></div>
+    <div class="dropdown">
+      <input type="text" placeholder="Search bus # or route.." id="myInput" />
+      <div id="myDropdown" class="dropdown-content">
+        <div id="options">
+        </div>
+      </div>
+    </div>
+    <!-- <div><input id="datetimepicker" placeholder="Change time.."></input></div> -->
+    <script src="dist.js"></script>
+  </body>
+</html>
